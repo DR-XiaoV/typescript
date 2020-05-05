@@ -161,11 +161,47 @@ let myArray: ReadonlyStringArray = ["Alice", "Bob"]
 
 
 
-interface ClockInterface {
-  currentTime: Date;
+
+// interface ClockInterface {
+//   currentTime: Date;
+// }
+
+// class Clock implements ClockInterface {
+//   currentTime: Date;
+//   constructor(h: number, m: number) { }
+// }
+
+
+
+// 继承接口
+// interface a{
+//   color: string
+// }
+// interface b extends a{
+//   width: number
+// }
+// interface c extends b{
+//   height: number
+// }
+// let obj = <c>{}
+// obj.color = '123'
+// obj.width = 123
+
+ 
+// 混合类型
+interface Counter {
+  (start: number): string;
+  interval: number;
+  reset(): void;
 }
 
-class Clock implements ClockInterface {
-  currentTime: Date;
-  constructor(h: number, m: number) { }
+function getCounter(): Counter {
+  let counter = <Counter>function (start: number) {
+    let obj = <Counter>function(start: number){}
+    obj.interval = 123
+  };
+  counter.interval = 123;
+  counter.reset = function () { };
+  return counter;
 }
+
